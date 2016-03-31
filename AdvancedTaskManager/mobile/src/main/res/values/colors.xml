@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#71acec</color>
+    <color name="colorPrimaryDark">#55a7e5</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="grey">#EDEEEF</color>
+    <color name="dark_green">#388E3C</color>
+
+    <color name="dark_grey">#aeaeae</color>
+
+    <color name="accent">#df4a32</color>
+
+    <color name="primary">#83CF1C</color>
+    <color name="primary_dark">#5AB831</color>
+    <color name="primary_light">#DCEDC8</color>
+
+    <color name="light_black">#747474</color>
+    <color name="black">#616161</color>
+    <color name="google">#c6412c</color>
+    <color name="fabBgTintColor">#71acec</color>
 </resources>

@@ -1,8 +1,16 @@
 <resources>
-    <string name="app_name">AdvancedTaskManager</string>
+    <string name="app_name">Tasko</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="add_new_list">Enter New List Name</string>
+    <string name="positive_button_create">Create</string>
+
+    <string-array name="list_type">
+        <item>Personal</item>
+        <item>Work</item>
+
+    </string-array>
 </resources>
