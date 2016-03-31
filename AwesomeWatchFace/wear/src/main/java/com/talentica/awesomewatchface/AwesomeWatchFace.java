@@ -35,6 +35,7 @@ import android.os.Message;
 import android.support.wearable.watchface.CanvasWatchFaceService;
 import android.support.wearable.watchface.WatchFaceStyle;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.WindowInsets;
 
@@ -54,12 +55,14 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
      * Update rate in milliseconds for interactive mode. We update once a second since seconds are
      * displayed in interactive mode.
      */
-    private static final long INTERACTIVE_UPDATE_RATE_MS = TimeUnit.SECONDS.toMillis(1);
+    private static final long INTERACTIVE_UPDATE_RATE_MS = TimeUnit.SECONDS.toMillis(30);
 
     /**
      * Handler message id for updating the time periodically in interactive mode.
      */
     private static final int MSG_UPDATE_TIME = 0;
+
+    private static final String TAG = "AwesomeWatchFace";
 
     @Override
     public Engine onCreateEngine() {
@@ -122,6 +125,8 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
         public void onCreate(SurfaceHolder holder) {
             super.onCreate(holder);
 
+            Log.d(TAG,"onCreate");
+
             setWatchFaceStyle(new WatchFaceStyle.Builder(AwesomeWatchFace.this)
                     .setCardPeekMode(WatchFaceStyle.PEEK_MODE_VARIABLE)
                     .setBackgroundVisibility(WatchFaceStyle.BACKGROUND_VISIBILITY_INTERRUPTIVE)
@@ -167,6 +172,8 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
         public void onVisibilityChanged(boolean visible) {
             super.onVisibilityChanged(visible);
 
+            Log.d(TAG,"onVisibilityChanged");
+
             if (visible) {
                 registerReceiver();
 
@@ -205,6 +212,7 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
         @Override
         public void onApplyWindowInsets(WindowInsets insets) {
             super.onApplyWindowInsets(insets);
+            Log.d(TAG,"onApplyWindowInsets");
 
             // Load resources that have alternate values for round watches.
             Resources resources = AwesomeWatchFace.this.getResources();
@@ -223,18 +231,21 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
         @Override
         public void onPropertiesChanged(Bundle properties) {
             super.onPropertiesChanged(properties);
+            Log.d(TAG,"onPropertiesChanged");
             mLowBitAmbient = properties.getBoolean(PROPERTY_LOW_BIT_AMBIENT, false);
         }
 
         @Override
         public void onTimeTick() {
             super.onTimeTick();
+            Log.d(TAG,"onTimeTick");
             invalidate();
         }
 
         @Override
         public void onAmbientModeChanged(boolean inAmbientMode) {
             super.onAmbientModeChanged(inAmbientMode);
+            Log.d(TAG,"onAmbientModeChanged");
             if (mAmbient != inAmbientMode) {
                 mAmbient = inAmbientMode;
                 if (mLowBitAmbient) {
@@ -254,6 +265,7 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
          */
         @Override
         public void onTapCommand(int tapType, int x, int y, long eventTime) {
+            Log.d(TAG,"onTapCommand");
             Resources resources = AwesomeWatchFace.this.getResources();
             switch (tapType) {
                 case TAP_TYPE_TOUCH:
@@ -266,7 +278,7 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
                     // The user has completed the tap gesture.
                     mTapCount++;
                     mBackgroundPaint.setColor(resources.getColor(mTapCount % 2 == 0 ?
-                            R.color.background : R.color.background_amb));
+                            R.color.background : R.color.background_tap));
                     break;
             }
             invalidate();
@@ -312,6 +324,7 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
          * or stops it if it shouldn't be running but currently is.
          */
         private void updateTimer() {
+            Log.d(TAG,"updateTimer");
             mUpdateTimeHandler.removeMessages(MSG_UPDATE_TIME);
             if (shouldTimerBeRunning()) {
                 mUpdateTimeHandler.sendEmptyMessage(MSG_UPDATE_TIME);
@@ -331,6 +344,7 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
          * Handle updating the time periodically in interactive mode.
          */
         private void handleUpdateTimeMessage() {
+            Log.d(TAG,"handleUpdateTimeMessage");
             invalidate();
             if (shouldTimerBeRunning()) {
                 long timeMs = System.currentTimeMillis();

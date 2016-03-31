@@ -2,5 +2,6 @@
 <resources>
     <color name="background_amb">#000000</color>
     <color name="background">#50a0a9</color>
+    <color name="background_tap">#b38686</color>
     <color name="digital_text">#ffffff</color>
 </resources>
