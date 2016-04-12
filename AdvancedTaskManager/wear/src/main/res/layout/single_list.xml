@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#71acec"
+        android:padding="5dp">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:paddingLeft="5dp"
+
+                  android:background="@android:color/background_light">
+        <TextView
+                android:fontFamily="sans-serif-light"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/list_name"
+                android:text="List Name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+        <TextView
+                android:fontFamily="sans-serif-light"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/list_type"
+                android:text="List detailssss"
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:textSize="12sp"/>
+
+        <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/list_key"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+    </LinearLayout>
+</LinearLayout>

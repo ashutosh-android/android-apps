@@ -1,14 +1,20 @@
 package com.talentica.atm.ui;
 
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
 import com.talentica.atm.R;
 import com.talentica.atm.model.ListModel;
+import com.talentica.atm.wear.DataSync;
+import com.talentica.atm.wear.NotificationManagerInternal;
 import com.talentica.atm.utils.Constants;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,8 +22,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class HomeActivity extends AppCompatActivity
@@ -25,11 +31,15 @@ public class HomeActivity extends AppCompatActivity
 
     private AllListAdapter mAllListAdapter;
     private ListView mListView;
+    private final String TAG= HomeActivity.class.getSimpleName();
+    Firebase allListRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,12 +68,91 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Firebase allListRef = new Firebase(Constants.FIREBASE_URL_ALL_LISTS);
+        allListRef = new Firebase(Constants.FIREBASE_URL_ALL_LISTS);
 
         mAllListAdapter = new AllListAdapter(this,ListModel.class,R.layout.single_list,allListRef);
 
         mListView.setAdapter(mAllListAdapter);
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                ListModel selectedList = mAllListAdapter.getItem(i);
+                if(selectedList != null)
+                {
+                    Intent intent = new Intent(HomeActivity.this,ListItemsActivity.class);
+
+                    String listId = mAllListAdapter.getRef(i).getKey();
+                    intent.putExtra(Constants.KEY_LIST_ID, listId);
+                    HomeActivity.this.startActivity(intent);
+
+                }
+
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG,"onResume");
+
+        allListRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                Log.e(TAG,"onChildAdded - "+dataSnapshot.child(Constants.FIREBASE_PROPERTY_LIST_NAME).getValue());
+
+                if((boolean)dataSnapshot.child(Constants.FIREBASE_PROPERTY_NEWLYCREATED).getValue())
+                {
+
+                    dataSnapshot.getRef().child(Constants.FIREBASE_PROPERTY_NEWLYCREATED).setValue(false);
+                    NotificationManagerInternal notificationManagerInternal = NotificationManagerInternal.getInstance();
+                    notificationManagerInternal.sendNotification(HomeActivity.this,"New List '"+dataSnapshot.child(Constants.FIREBASE_PROPERTY_LIST_NAME).getValue()+"'created");
+
+                    DataSync.getInstance().updateAllListToWear(HomeActivity.this);
+                }
+
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                Log.e(TAG,"onChildChanged - "+dataSnapshot.child(Constants.FIREBASE_PROPERTY_LIST_NAME).getValue());
+
+
+
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                Log.e(TAG,"onChildRemoved - "+dataSnapshot.child(Constants.FIREBASE_PROPERTY_LIST_NAME).getValue());
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                Log.e(TAG,"onChildMoved - "+dataSnapshot.child(Constants.FIREBASE_PROPERTY_LIST_NAME).getValue());
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+                Log.e(TAG,"onCancelled ");
+
+            }
+        });
     }
 
     @Override

@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name=".ATMApplication"
-            android:allowBackup="true"
+        android:name=".ATMApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -21,6 +21,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.ListItemsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".service.ListernerServiceWear">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

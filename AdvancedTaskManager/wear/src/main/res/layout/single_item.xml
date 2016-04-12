@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#71acec"
+        android:padding="5dp">
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:paddingLeft="5dp"
+                  android:paddingBottom="5dp"
+
+                  android:background="@android:color/background_light">
+        <TextView
+                android:fontFamily="sans-serif-light"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/item_name"
+                android:text="Item Name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+        <TextView
+                android:fontFamily="sans-serif-light"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/item_status"
+                android:text="Pending"
+                android:textColor="@color/red"
+                android:textStyle="italic"
+                android:textSize="12sp"/>
+
+        <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/item_key"
+                android:textSize="12sp"
+                android:visibility="gone"/>
+
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/item_button"
+                android:text="Update"
+                android:gravity="center"
+                android:layout_gravity="center"
+                style="@android:style/Widget.Material.Light.Button"
+                android:background="#ea6868"
+                />
+    </LinearLayout>
+</LinearLayout>

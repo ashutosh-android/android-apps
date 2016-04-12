@@ -4,6 +4,7 @@ import com.firebase.client.Query;
 import com.firebase.ui.FirebaseListAdapter;
 import com.talentica.atm.R;
 import com.talentica.atm.model.ListModel;
+import com.talentica.atm.utils.Utils;
 
 import android.app.Activity;
 import android.view.View;
@@ -24,14 +25,14 @@ public class AllListAdapter extends FirebaseListAdapter<ListModel> {
     protected void populateView(View view, ListModel listModel, int i) {
 
         TextView textViewListName = (TextView) view.findViewById(R.id.text_view_list_name);
-        TextView textViewCreatedByUser = (TextView) view.findViewById(R.id.text_view_created_by_user);
+//        TextView textViewCreatedByUser = (TextView) view.findViewById(R.id.text_view_created_by_user);
         TextView textViewListType = (TextView) view.findViewById(R.id.text_view_list_type);
         TextView textViewLastEdited = (TextView) view.findViewById(R.id.text_view_edit_time);
 
         textViewListName.setText(listModel.getListName());
-        textViewCreatedByUser.setText(listModel.getOwner());
+//        textViewCreatedByUser.setText(listModel.getOwner());
         textViewListType.setText(listModel.getListType());
-        textViewLastEdited.setText(Long.toString(listModel.getTimestampCreatedLong()));
+        textViewLastEdited.setText(Utils.getFormattedTime(listModel.getTimestampCreatedLong()));
 
 
 

@@ -1,5 +1,7 @@
 package com.talentica.atm;
 
+import com.talentica.common.Test;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

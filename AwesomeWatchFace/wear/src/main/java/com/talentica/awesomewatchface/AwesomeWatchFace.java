@@ -100,6 +100,7 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
         Time mTime2;
 
         private Bitmap mBackgroundBitmap;
+        private Bitmap mFullBackGroundBitmap;
 
         final BroadcastReceiver mTimeZoneReceiver = new BroadcastReceiver() {
             @Override
@@ -140,10 +141,15 @@ public class AwesomeWatchFace extends CanvasWatchFaceService {
 
             mBackgroundPaint = new Paint();
             mBackgroundPaint.setColor(resources.getColor(R.color.background));
+//            mBackgroundPaint.setColor(resources.getDrawable(R.drawable.rect_background));
+//            mBackgroundPaint.set
 
+            mFullBackGroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.rect_background);
             mBackgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
 
             mTextPaint = new Paint();
+
+
             mTextPaint = createTextPaint(resources.getColor(R.color.digital_text));
 
             mZoneTextPaint = new Paint();

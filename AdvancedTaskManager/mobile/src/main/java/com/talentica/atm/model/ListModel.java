@@ -16,9 +16,15 @@ public class ListModel {
     private String listType;
     private HashMap<String, Object> timestampLastChanged;
     private HashMap<String, Object> timestampCreated;
+    private boolean newlyCreated ;
 
 
     public ListModel() {
+    }
+
+
+    public boolean isNewlyCreated() {
+        return newlyCreated;
     }
 
     public ListModel(String listName, String owner, String listType, HashMap<String, Object> timestampCreated) {
@@ -29,6 +35,7 @@ public class ListModel {
         HashMap<String, Object> timestampNowObject = new HashMap<String, Object>();
         timestampNowObject.put(Constants.FIREBASE_PROPERTY_TIMESTAMP, ServerValue.TIMESTAMP);
         this.timestampLastChanged = timestampNowObject;
+        this.newlyCreated = true;
     }
 
     public String getListName() {
