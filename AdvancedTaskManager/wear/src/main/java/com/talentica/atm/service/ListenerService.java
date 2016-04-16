@@ -108,9 +108,6 @@ public class ListenerService extends WearableListenerService {
                     @Override
                     public void run() {
 
-//                        ListItemsActivity.sListItemsAdapter.updateData(items);
-//                        ListItemsActivity.sListItemsAdapter.notifyDataSetChanged();
-
                         if(ListItemsActivity.sListItemsGridPagerAdapter != null && items != null)
                         {
                             ListItemsActivity.sListItemsGridPagerAdapter.updateData(items);

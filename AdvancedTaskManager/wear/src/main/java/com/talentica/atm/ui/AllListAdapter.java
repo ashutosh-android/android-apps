@@ -50,7 +50,6 @@ public class AllListAdapter extends WearableListView.Adapter {
                 super(itemView);
                 // find the text view within the custom item's layout
                 textViewListName = (TextView) itemView.findViewById(R.id.list_name);
-                //textViewListType = (TextView) itemView.findViewById(R.id.list_type);
                 textViewListId = (TextView) itemView.findViewById(R.id.list_key);
                 mCircledImageView = (CircledImageView)itemView.findViewById(R.id.imageView);
                 mCircledImageView.setImageCirclePercentage(10);

@@ -7,21 +7,21 @@
             android:layout_width="match_parent"
             >
 
-        <FrameLayout
-                android:id="@+id/frame_layout"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:background="#71acec"
-                app:layout_box="top|left">
+        <!--<FrameLayout-->
+                <!--android:id="@+id/frame_layout"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:background="#71acec"-->
+                <!--app:layout_box="top|left|right|all">-->
 
-            <android.support.wearable.view.WearableListView
-                    android:id="@+id/wearable_list"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
-                    android:background="#71acec"
-            >
-            </android.support.wearable.view.WearableListView>
-        </FrameLayout>
+            <!--<android.support.wearable.view.WearableListView-->
+                    <!--android:id="@+id/wearable_list"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:background="#71acec"-->
+            <!--&gt;-->
+            <!--</android.support.wearable.view.WearableListView>-->
+        <!--</FrameLayout>-->
 
 
 

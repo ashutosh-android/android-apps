@@ -54,58 +54,36 @@ public class ListItemsActivity extends Activity implements GoogleApiClient.OnCon
         }
 
 
+        // UI Section
+
+//        ItemModelCommon[] items = new ItemModelCommon[4];
+//        items[0] = new ItemModelCommon("Item1","1212","Pending",111111l);
+//        items[1] = new ItemModelCommon("Item2","1212","Done",111111l);
+//        items[2] = new ItemModelCommon("Item3","1212","Pending",111111l);
+//        items[3] = new ItemModelCommon("Item4","1212","Done",111111l);
+//
+//        mGridViewPager = (GridViewPager) findViewById(R.id.gridViewPager);
+//
+//        sListItemsGridPagerAdapter = new ListItemsGridPagerAdapter(this,items);
+//
+//        mGridViewPager.setAdapter(sListItemsGridPagerAdapter);
 
 
-        ItemModelCommon[] items = new ItemModelCommon[4];
-        items[0] = new ItemModelCommon("Item1","1212","Pending",111111l);
-        items[1] = new ItemModelCommon("Item2","1212","Done",111111l);
-        items[2] = new ItemModelCommon("Item3","1212","Pending",111111l);
-        items[3] = new ItemModelCommon("Item4","1212","Done",111111l);
 
-        mGridViewPager = (GridViewPager) findViewById(R.id.gridViewPager);
+// Data Sync Section
 
-        sListItemsGridPagerAdapter = new ListItemsGridPagerAdapter(this,items);
-
-        mGridViewPager.setAdapter(sListItemsGridPagerAdapter);
-
-
-
-//        WearableListView listView =
-//                (WearableListView) findViewById(R.id.wearable_list_items);
-
-//        sListItemsAdapter = new ListItemsAdapter(this,items);
-//
-//
-//
-//        listView.setAdapter(sListItemsAdapter);
-//
-//
-//        listView.setClickListener(new WearableListView.ClickListener() {
-//            @Override
-//            public void onClick(WearableListView.ViewHolder viewHolder) {
-//
-//                //Log.e(TAG,"OnClick in List - "+((TextView)viewHolder.itemView.findViewById(R.id.list_name)).getText());
-//
-//
-//            }
-//
-//            @Override
-//            public void onTopEmptyRegionClick() {
-//
-//            }
-//        });
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Wearable.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .addApi(Wearable.API)
+//                .addConnectionCallbacks(this)
+//                .addOnConnectionFailedListener(this)
+//                .build();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        // Data Sync Section
+//        mGoogleApiClient.connect();
     }
 
     @Override
@@ -116,13 +94,15 @@ public class ListItemsActivity extends Activity implements GoogleApiClient.OnCon
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mGoogleApiClient.disconnect();
+        // Data Sync Section
+//        mGoogleApiClient.disconnect();
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-        new FetchitemsFromMobile().execute(this);
+        // Data Sync Section
+//        new FetchitemsFromMobile().execute(this);
 
     }
 
@@ -142,19 +122,20 @@ public class ListItemsActivity extends Activity implements GoogleApiClient.OnCon
         @Override
         protected Void doInBackground(Object... params) {
 
-            Log.e(TAG,"FetchitemsFromMobile");
-
-
-            NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mGoogleApiClient ).await();
-            for(Node node : nodes.getNodes()) {
-
-                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                        mGoogleApiClient, node.getId(), "/fetchItems", mListId.getBytes() ).await();
-                if(result.getStatus().isSuccess())
-                {
-                    //ToDo
-                }
-            }
+            // Data Sync Section
+//            Log.e(TAG,"FetchitemsFromMobile");
+//
+//
+//            NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mGoogleApiClient ).await();
+//            for(Node node : nodes.getNodes()) {
+//
+//                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
+//                        mGoogleApiClient, node.getId(), "/fetchItems", mListId.getBytes() ).await();
+//                if(result.getStatus().isSuccess())
+//                {
+//                    //ToDo
+//                }
+//            }
             return null;
         }
     }

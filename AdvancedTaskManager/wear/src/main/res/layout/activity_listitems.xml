@@ -7,26 +7,20 @@
         android:layout_width="match_parent"
 >
 
-    <FrameLayout
-            android:id="@+id/frame_layout_items"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:background="#71acec"
-            app:layout_box="top|left">
+    <!--<FrameLayout-->
+            <!--android:id="@+id/frame_layout_items"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:background="#71acec"-->
+            <!--app:layout_box="top|left|right|all">-->
 
-        <!--<android.support.wearable.view.WearableListView-->
-                <!--android:id="@+id/wearable_list_items"-->
-                <!--android:layout_height="match_parent"-->
+
+
+        <!--<android.support.wearable.view.GridViewPager-->
+                <!--android:id="@+id/gridViewPager"-->
                 <!--android:layout_width="match_parent"-->
-                <!--android:background="#71acec"-->
-        <!--&gt;-->
-        <!--</android.support.wearable.view.WearableListView>-->
-
-        <android.support.wearable.view.GridViewPager
-                android:id="@+id/gridViewPager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                 />
-    </FrameLayout>
+                <!--android:layout_height="match_parent"-->
+                 <!--/>-->
+    <!--</FrameLayout>-->
 </android.support.wearable.view.BoxInsetLayout>
 

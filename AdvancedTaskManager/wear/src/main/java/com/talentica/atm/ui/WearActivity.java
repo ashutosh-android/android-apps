@@ -50,47 +50,54 @@ public class WearActivity extends Activity implements GoogleApiClient.Connection
         setContentView(R.layout.activity_wear);
 
 
+// UI Section
 
-        WearableListView listView =
-                (WearableListView) findViewById(R.id.wearable_list);
+//        WearableListView listView =
+//                (WearableListView) findViewById(R.id.wearable_list);
+//
+//        ListModelCommon[] lists = new ListModelCommon[4];
+//        lists[0] = new ListModelCommon("1212","Dummy List1","Personal",11111l);
+//        lists[1] = new ListModelCommon("1212","Dummy List2","Work",11111l);
+//        lists[2] = new ListModelCommon("1212","Dummy List3","Work",11111l);
+//        lists[3] = new ListModelCommon("1212","Dummy List4","Personal",11111l);
+//
+//
+//        listAdapter = new AllListAdapter(this,lists);
+//
+//
+//
+//        listView.setAdapter(listAdapter);
+//
+//
+//        listView.setClickListener(new WearableListView.ClickListener() {
+//            @Override
+//            public void onClick(WearableListView.ViewHolder viewHolder) {
+//
+//                Intent intent = new Intent(WearActivity.this,ListItemsActivity.class);
+//                intent.putExtra("listKey",((TextView)viewHolder.itemView.findViewById(R.id.list_key)).getText());
+//                WearActivity.this.startActivity(intent);
+//
+//
+//                Log.e(TAG,"OnClick in List - "+((TextView)viewHolder.itemView.findViewById(R.id.list_key)).getText());
+//
+//
+//           }
+//
+//            @Override
+//            public void onTopEmptyRegionClick() {
+//
+//            }
+//        });
 
-        ListModelCommon[] lists = new ListModelCommon[0];
 
-
-        listAdapter = new AllListAdapter(this,lists);
-
-
-
-        listView.setAdapter(listAdapter);
-
-
-        listView.setClickListener(new WearableListView.ClickListener() {
-            @Override
-            public void onClick(WearableListView.ViewHolder viewHolder) {
-
-                Intent intent = new Intent(WearActivity.this,ListItemsActivity.class);
-                intent.putExtra("listKey",((TextView)viewHolder.itemView.findViewById(R.id.list_key)).getText());
-                WearActivity.this.startActivity(intent);
-
-
-                Log.e(TAG,"OnClick in List - "+((TextView)viewHolder.itemView.findViewById(R.id.list_key)).getText());
-
-
-           }
-
-            @Override
-            public void onTopEmptyRegionClick() {
-
-            }
-        });
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Wearable.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-
-        mGoogleApiClient.connect();
+        //DataSync Section
+//        mGoogleApiClient = new GoogleApiClient.Builder(this)
+//                .addApi(Wearable.API)
+//                .addConnectionCallbacks(this)
+//                .addOnConnectionFailedListener(this)
+//                .build();
+//
+//        mGoogleApiClient.connect();
 
 
 
@@ -101,20 +108,23 @@ public class WearActivity extends Activity implements GoogleApiClient.Connection
     protected void onStart() {
         super.onStart();
         Log.e(TAG,"onStart");
-        mGoogleApiClient.connect();
+        //DataSync Section
+//        mGoogleApiClient.connect();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mGoogleApiClient.disconnect();
+        //DataSync Section
+//        mGoogleApiClient.disconnect();
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.e(TAG,"onConnected");
 
-        new FetchDataFromMobile().execute(this);
+        //DataSync Section
+//        new FetchDataFromMobile().execute(this);
 
     }
 
@@ -137,20 +147,22 @@ public class WearActivity extends Activity implements GoogleApiClient.Connection
         @Override
         protected Void doInBackground(Context... contexts) {
 
-            Log.e(TAG,"FetchDataFromMobile");
+            //DataSync Section
 
-            String text = "FetchData";
-
-            NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mGoogleApiClient ).await();
-            for(Node node : nodes.getNodes()) {
-
-                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
-                        mGoogleApiClient, node.getId(), "/fetchData", text.getBytes() ).await();
-                if(result.getStatus().isSuccess())
-                {
-                    //ToDo
-                }
-            }
+//            Log.e(TAG,"FetchDataFromMobile");
+//
+//            String text = "FetchData";
+//
+//            NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes( mGoogleApiClient ).await();
+//            for(Node node : nodes.getNodes()) {
+//
+//                MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(
+//                        mGoogleApiClient, node.getId(), "/fetchData", text.getBytes() ).await();
+//                if(result.getStatus().isSuccess())
+//                {
+//                    //ToDo
+//                }
+//            }
             return null;
         }
     }
