@@ -6,6 +6,7 @@ import com.talentica.atm.common.ListModelCommon;
 import org.w3c.dom.Text;
 
 import android.content.Context;
+import android.support.wearable.view.CircledImageView;
 import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.widget.TextView;
  */
 public class AllListAdapter extends WearableListView.Adapter {
         private ListModelCommon[] mDataset;
-        private final Context mContext;
+        public final Context mContext;
         private final LayoutInflater mInflater;
 
         // Provide a suitable constructor (depends on the kind of dataset)
@@ -33,17 +34,27 @@ public class AllListAdapter extends WearableListView.Adapter {
             mDataset = dataset;
         }
 
+        public static void createNotification(String message)
+        {
+
+
+        }
+
         // Provide a reference to the type of views you're using
         public static class ItemViewHolder extends WearableListView.ViewHolder {
             private TextView textViewListName;
-            private TextView textViewListType;
+            //private TextView textViewListType;
             private TextView textViewListId;
+            private CircledImageView mCircledImageView;
             public ItemViewHolder(View itemView) {
                 super(itemView);
                 // find the text view within the custom item's layout
                 textViewListName = (TextView) itemView.findViewById(R.id.list_name);
-                textViewListType = (TextView) itemView.findViewById(R.id.list_type);
+                //textViewListType = (TextView) itemView.findViewById(R.id.list_type);
                 textViewListId = (TextView) itemView.findViewById(R.id.list_key);
+                mCircledImageView = (CircledImageView)itemView.findViewById(R.id.imageView);
+                mCircledImageView.setImageCirclePercentage(10);
+
             }
         }
 
@@ -65,13 +76,25 @@ public class AllListAdapter extends WearableListView.Adapter {
             // retrieve the text view
             ItemViewHolder itemHolder = (ItemViewHolder) holder;
             TextView listName = itemHolder.textViewListName;
-            TextView listType = itemHolder.textViewListType;
+            //TextView listType = itemHolder.textViewListType;
             TextView listId = itemHolder.textViewListId;
+            CircledImageView circledImageView = itemHolder.mCircledImageView;
 
             // replace text contents
             listName.setText(mDataset[position].getListName());
-            listType.setText(mDataset[position].getListType());
+            //listType.setText(mDataset[position].getListType());
             listId.setText(mDataset[position].getListId());
+            circledImageView.setImageCirclePercentage(10);
+            if(mDataset[position].getListType().equalsIgnoreCase("Personal"))
+            {
+                circledImageView.setImageResource(R.drawable.home);
+            }
+            else
+            {
+                circledImageView.setImageResource(R.drawable.work);
+            }
+
+            //circledImageView.
             // replace list item's metadata
             holder.itemView.setTag(position);
         }

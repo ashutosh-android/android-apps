@@ -17,6 +17,19 @@
 
         <activity android:name=".ui.ListItemsActivity"/>
 
+        <activity android:name=".ui.CustomNotificationActivity"
+                  android:exported="true"
+                  android:allowEmbedded="true"
+                  android:taskAffinity=""
+                  android:theme="@android:style/Theme.DeviceDefault.Light"
+        >
+
+        </activity>
+
+        <activity
+                android:name="android.support.wearable.activity.ConfirmationActivity">
+        </activity>
+
         <service android:name=".service.ListenerService">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />

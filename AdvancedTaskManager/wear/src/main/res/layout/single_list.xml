@@ -3,34 +3,43 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#71acec"
         android:padding="5dp">
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="vertical"
+                  android:orientation="horizontal"
                   android:paddingLeft="5dp"
 
                   android:background="@android:color/background_light">
+
+        <android.support.wearable.view.CircledImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageView"
+                app:circle_radius="16dp"
+                app:circle_border_width="2dp"
+                app:circle_border_color="@color/black"
+                app:circle_color="@android:color/transparent"
+
+
+
+        />
+
         <TextView
                 android:fontFamily="sans-serif-light"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:id="@+id/list_name"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:text="List Name"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="14sp"/>
-        <TextView
-                android:fontFamily="sans-serif-light"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:id="@+id/list_type"
-                android:text="List detailssss"
-                android:textColor="@color/red"
-                android:textStyle="italic"
-                android:textSize="12sp"/>
+
 
         <TextView
                 android:layout_height="wrap_content"

@@ -18,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WearableListView;
 import android.util.Log;
 import android.widget.TextView;
@@ -35,6 +36,9 @@ public class ListItemsActivity extends Activity implements GoogleApiClient.OnCon
 
     private String mListId;
 
+    private GridViewPager mGridViewPager;
+    public static ListItemsGridPagerAdapter sListItemsGridPagerAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,33 +55,45 @@ public class ListItemsActivity extends Activity implements GoogleApiClient.OnCon
 
 
 
-        WearableListView listView =
-                (WearableListView) findViewById(R.id.wearable_list_items);
 
-        ItemModelCommon[] items = new ItemModelCommon[0];
+        ItemModelCommon[] items = new ItemModelCommon[4];
+        items[0] = new ItemModelCommon("Item1","1212","Pending",111111l);
+        items[1] = new ItemModelCommon("Item2","1212","Done",111111l);
+        items[2] = new ItemModelCommon("Item3","1212","Pending",111111l);
+        items[3] = new ItemModelCommon("Item4","1212","Done",111111l);
 
+        mGridViewPager = (GridViewPager) findViewById(R.id.gridViewPager);
 
-        sListItemsAdapter = new ListItemsAdapter(this,items);
+        sListItemsGridPagerAdapter = new ListItemsGridPagerAdapter(this,items);
 
-
-
-        listView.setAdapter(sListItemsAdapter);
-
-
-        listView.setClickListener(new WearableListView.ClickListener() {
-            @Override
-            public void onClick(WearableListView.ViewHolder viewHolder) {
-
-                //Log.e(TAG,"OnClick in List - "+((TextView)viewHolder.itemView.findViewById(R.id.list_name)).getText());
+        mGridViewPager.setAdapter(sListItemsGridPagerAdapter);
 
 
-            }
 
-            @Override
-            public void onTopEmptyRegionClick() {
+//        WearableListView listView =
+//                (WearableListView) findViewById(R.id.wearable_list_items);
 
-            }
-        });
+//        sListItemsAdapter = new ListItemsAdapter(this,items);
+//
+//
+//
+//        listView.setAdapter(sListItemsAdapter);
+//
+//
+//        listView.setClickListener(new WearableListView.ClickListener() {
+//            @Override
+//            public void onClick(WearableListView.ViewHolder viewHolder) {
+//
+//                //Log.e(TAG,"OnClick in List - "+((TextView)viewHolder.itemView.findViewById(R.id.list_name)).getText());
+//
+//
+//            }
+//
+//            @Override
+//            public void onTopEmptyRegionClick() {
+//
+//            }
+//        });
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)

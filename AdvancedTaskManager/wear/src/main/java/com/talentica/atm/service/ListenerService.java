@@ -9,11 +9,18 @@ import com.google.android.gms.wearable.WearableListenerService;
 
 import com.talentica.atm.common.ItemModelCommon;
 import com.talentica.atm.common.ListModelCommon;
+import com.talentica.atm.ui.CustomNotificationActivity;
 import com.talentica.atm.ui.ListItemsActivity;
 import com.talentica.atm.ui.WearActivity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Looper;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -53,8 +60,30 @@ public class ListenerService extends WearableListenerService {
                     @Override
                     public void run() {
 
-                        WearActivity.listAdapter.updateData(lists);
-                        WearActivity.listAdapter.notifyDataSetChanged();
+                        if(WearActivity.listAdapter != null && lists != null)
+                        {
+                            WearActivity.listAdapter.updateData(lists);
+                            WearActivity.listAdapter.notifyDataSetChanged();
+                        }
+
+
+//                        Intent intent = new Intent(WearActivity.listAdapter.mContext, CustomNotificationActivity.class);
+//                        PendingIntent displayPendingIntent =
+//                                PendingIntent.getActivity(WearActivity.listAdapter.mContext, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//
+//
+//                        // Simple Notification
+//
+//
+//                        Notification.Builder notificationBuilder =
+//                                new Notification.Builder(WearActivity.listAdapter.mContext)
+//                                        .setSmallIcon(android.R.drawable.ic_dialog_info)
+//                                        .extend(new Notification.WearableExtender()
+//                                            .setDisplayIntent(displayPendingIntent));
+//
+//                        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
+//                                .notify(0,notificationBuilder.build());
 
                     }
                 });
@@ -79,8 +108,15 @@ public class ListenerService extends WearableListenerService {
                     @Override
                     public void run() {
 
-                        ListItemsActivity.sListItemsAdapter.updateData(items);
-                        ListItemsActivity.sListItemsAdapter.notifyDataSetChanged();
+//                        ListItemsActivity.sListItemsAdapter.updateData(items);
+//                        ListItemsActivity.sListItemsAdapter.notifyDataSetChanged();
+
+                        if(ListItemsActivity.sListItemsGridPagerAdapter != null && items != null)
+                        {
+                            ListItemsActivity.sListItemsGridPagerAdapter.updateData(items);
+                            ListItemsActivity.sListItemsGridPagerAdapter.notifyDataSetChanged();
+
+                        }
 
                     }
                 });
